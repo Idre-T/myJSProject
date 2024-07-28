@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link href="./styles/styles.css" rel="stylesheet">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./styles/styles.css" rel="stylesheet" />
+    <link href="./styles/modal.css" rel="stylesheet" />
+    <script src="JS/script.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Javascript Final Assignment - Phone Book</title>
   </head>
 
@@ -19,47 +21,80 @@
             id="search"
             type="search"
             placeholder="&#x1F50D; Start typing to search..."
-          >
-          <div class="add-icon">&#43;</div>
+          />
+          <button id="showFormBtn" class="pushable" type="button">&#43;</button>
         </div>
-        <ul>
-          <li class="contact">
-            <img src="https://i.pravatar.cc/100?img=1" alt="John Doe">
-            <h2>John Doe</h2>
-            <div class="icons">
-              <span class="edit-icon">&#9998;</span>
-              <span class="remove-icon">&#10006;</span>
-              <span class="info-icon">&#8505;</span>
+        <ul class="phone-contact-list"></ul>
+
+        <!-- Delete all contacts button -->
+        <button id="delete-all" type="button">
+          <span class="front delete-btn"> Delete All Contacts </span>
+        </button>
+
+        <!-- Modal Form-->
+        <section class="contact-modal" style="display: none">
+          <div id="form-container">
+            <div class="header">
+              <p class="alert">New Contact</p>
             </div>
-          </li>
-          <li class="contact">
-            <img src="https://i.pravatar.cc/100?img=2" alt="Jane Smith">
-            <h2>Jane Smith</h2>
-            <div class="icons">
-              <span class="edit-icon">&#9998;</span>
-              <span class="remove-icon">&#10006;</span>
-              <span class="info-icon">&#8505;</span>
-            </div>
-          </li>
-          <li class="contact">
-            <img src="https://i.pravatar.cc/100?img=3" alt="Bob Johnson">
-            <h2>Bob Johnson</h2>
-            <div class="icons">
-              <span class="edit-icon">&#9998;</span>
-              <span class="remove-icon">&#10006;</span>
-              <span class="info-icon">&#8505;</span>
-            </div>
-          </li>
-          <li class="contact">
-            <img src="https://i.pravatar.cc/100?img=4" alt="Sammy Larry">
-            <h2>Sammy Larry</h2>
-            <div class="icons">
-              <span class="edit-icon">&#9998;</span>
-              <span class="remove-icon">&#10006;</span>
-              <span class="info-icon">&#8505;</span>
-            </div>
-          </li>
-        </ul>
+            <form id="contactForm">
+              <!-- Input fields for new contact -->
+              <div class="form-label">
+                <label class="label-type" for="name">Name</label>
+                <div class="error"></div>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  class="new-contact-input"
+                  placeholder="John Smith"
+                />
+              </div>
+              <div class="form-property">
+                <label class="label-type" for="phone">Phone Number</label>
+                <div class="error"></div>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  class="new-contact-input"
+                  placeholder="0549876543"
+                />
+              </div>
+              <div class="form-property">
+                <label class="label-type" for="email">Email</label>
+                <div class="error"></div>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  class="new-contact-input"
+                  placeholder="john.smith@example.com"
+                />
+              </div>
+              <div class="form-property">
+                <label class="label-type">Address</label>
+                <div class="error"></div>
+                <input
+                  type="text"
+                  class="new-contact-input"
+                  placeholder="123 Main Street, Anytown, USA"
+                  id="address"
+                />
+              </div>
+              <!-- Action buttons -->
+              <div class="actions">
+                <button type="button" class="mark-as-read cancelBtn">
+                  Cancel
+                </button>
+                <button id="saveBtn" type="button" class="read confirmBtn">
+                  Confirm
+                </button>
+              </div>
+            </form>
+          </div>
+        </section>
+
       </main>
     </div>
 

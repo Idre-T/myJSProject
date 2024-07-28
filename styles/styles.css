@@ -59,7 +59,7 @@ h1 {
   outline: none;
 }
 
-.add-icon {
+#showFormBtn {
   font-size: 3em;
   font-weight: bolder;
   color: #000000;
@@ -113,6 +113,28 @@ h1 {
   margin-left: 7%;
   font-size: 2em;
   color: #1aff00;
+}
+
+.front {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  border-radius: 8px;
+  background: rgb(89, 59, 155);
+  padding: 8px 12px;
+  color: rgb(0, 174, 255);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-size: 1rem;
+  transform: translateY(-2px);
+}
+
+/* Special styling for specific ID */
+#delete-all .front {
+  padding: 1rem;
 }
 
 footer {
