@@ -132,6 +132,16 @@ h1 {
   transform: translateY(-2px);
 }
 
+/* Styles for empty list message */
+#empty-list {
+  display: none;
+}
+
+#empty-list h3 {
+  color: #ff0000;
+  font-size: 2rem;
+}
+
 /* Special styling for specific ID */
 #delete-all .front {
   padding: 1rem;

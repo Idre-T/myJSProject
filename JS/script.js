@@ -11,8 +11,14 @@ document.addEventListener("DOMContentLoaded", function () {
   const phoneInput = document.getElementById("phone");
   const addressInput = document.getElementById("address");
   const emailInput = document.getElementById("email");
-  let contactIndex = -1;
   const contactsList = document.querySelector(".phone-contact-list");
+  const confirmText = document.getElementById("confirm-text");
+  const confirmForm = document.getElementById("confirm-popup");
+  const cancelBtn = document.getElementById("confirm-cancelBtn");
+  const confirmBtn = document.getElementById("confirm-confirmBtn");
+  const alertText = document.querySelector(".alert");
+  const searchInput = document.getElementById("search-input");
+  let contactIndex = -1;
 
   // create contacts array of objects
   let contacts = [
@@ -61,7 +67,9 @@ document.addEventListener("DOMContentLoaded", function () {
       PhoneNumber: phoneInput.value.trim(),
       Address: addressInput.value.trim(),
       Email: emailInput.value.trim(),
-      ImageURL: `https://i.pravatar.cc/100?img=${Math.floor(Math.random() * 71)}`    
+      ImageURL: `https://i.pravatar.cc/100?img=${Math.floor(
+        Math.random() * 71
+      )}`,
     };
 
     if (contactIndex === -1) {
@@ -86,13 +94,43 @@ document.addEventListener("DOMContentLoaded", function () {
     contacts = [];
     contactNames = [];
     contactsList.innerHTML = ""; // Clear the contacts list
+    closeConfirmModal();
+    displayEmptyListMessage();
   }
 
   // Event listener for delete all button
   deleteAllBtn.addEventListener("click", function (event) {
     event.preventDefault();
-    deleteAllContacts();
+    confirmText.textContent = "Are you sure you want to delete all contacts?";
+    openConfirmModal(deleteAllContacts);
   });
+
+  // Function to open and close the confirmation modal
+  function openConfirmModal(callback) {
+    confirmForm.style.display = "flex";
+    confirmBtn.addEventListener("click", function handler() {
+      callback();
+      confirmBtn.removeEventListener("click", handler); // Remove the event listener after use
+      closeConfirmModal();
+    });
+  }
+
+  function closeConfirmModal() {
+    confirmForm.style.display = "none";
+  }
+
+  // Event listener for cancel button in the confirmation modal
+  cancelBtn.addEventListener("click", closeConfirmModal);
+
+  // Function to display or hide empty list message
+  function displayEmptyListMessage() {
+    const emptyListMessage = document.getElementById("empty-list");
+    if (contacts.length === 0) {
+      emptyListMessage.style.display = "block";
+    } else {
+      emptyListMessage.style.display = "none";
+    }
+  }
 
   function generateContact(name, imageSrc) {
     const contactHtml = `
@@ -130,6 +168,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
       contactsList.appendChild(contactElement);
     });
+
+    displayEmptyListMessage();
   }
 
   // Function to edit a contact
@@ -140,6 +180,7 @@ document.addEventListener("DOMContentLoaded", function () {
     phoneInput.value = contact.PhoneNumber;
     addressInput.value = contact.Address;
     emailInput.value = contact.Email;
+    alertText.innerHTML = "Edit Contact";
     openModal();
   }
 
@@ -159,6 +200,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function closeModal() {
     contactForm.style.display = "none";
+    alertText.innerHTML = "New Contact"; // reset to "New Contact" from "Edit Contact"
     clearInputFields(); // Clear input fields on close
   }
 
@@ -169,6 +211,19 @@ document.addEventListener("DOMContentLoaded", function () {
     addressInput.value = "";
     emailInput.value = "";
   }
+
+  // Function to filter contacts by name
+  function filterContacts(searchedName) {
+    const filteredContacts = contacts.filter((contact) =>
+      contact.Name.toLowerCase().includes(searchedName.toLowerCase())
+    );
+    displayContacts(filteredContacts);
+  }
+
+  // Event listener for search input field
+  searchInput.addEventListener("input", function () {
+    filterContacts(searchInput.value);
+  });
 
   // Event listener for show form button to open modal
   showFormBtn.addEventListener("click", function () {

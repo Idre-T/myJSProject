@@ -3,6 +3,7 @@
   <head>
     <link href="./styles/styles.css" rel="stylesheet" />
     <link href="./styles/modal.css" rel="stylesheet" />
+    <link href="./styles/confirm.css" rel="stylesheet" />
     <script src="JS/script.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -18,7 +19,7 @@
       <main>
         <div class="search-bar">
           <input
-            id="search"
+            id="search-input"
             type="search"
             placeholder="&#x1F50D; Start typing to search..."
           />
@@ -30,6 +31,13 @@
         <button id="delete-all" type="button">
           <span class="front delete-btn"> Delete All Contacts </span>
         </button>
+
+        <!-- Empty list message -->
+        <div id="empty-list" style="display: none">
+          <h3>
+            Your Contact List is Empty
+          </h3>
+        </div>
 
         <!-- Modal Form-->
         <section class="contact-modal" style="display: none">
@@ -95,6 +103,37 @@
           </div>
         </section>
 
+        <!-- Confirm Modal-->
+        <section id="confirm-popup" class="confirm-popup" style="display: none">
+          <div class="card">
+            <div class="header">
+              <p class="alert-Warning">Confirmation Required</p>
+            </div>
+            <!-- Confirmation message -->
+            <p id="confirm-text" class="message">
+              Are you sure you want to delete this Contact?
+            </p>
+            <!-- Confirmation buttons -->
+            <div class="actions">
+              <button
+                id="confirm-cancelBtn"
+                type="button"
+                class="cancel-btn"
+                aria-label="Cancel"
+              >
+                Cancel
+              </button>
+              <button
+                id="confirm-confirmBtn"
+                type="button"
+                class="confirm-btn"
+                aria-label="Confirm"
+              >
+                Confirm
+              </button>
+            </div>
+          </div>
+        </section>
       </main>
     </div>
 
